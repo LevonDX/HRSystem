@@ -1,0 +1,14 @@
+C:\Users\lehovhan\source\repos\HRSystem\HRSystem.Data\bin\Debug\net6.0\HRSystem.Data.deps.json
+C:\Users\lehovhan\source\repos\HRSystem\HRSystem.Data\bin\Debug\net6.0\HRSystem.Data.dll
+C:\Users\lehovhan\source\repos\HRSystem\HRSystem.Data\bin\Debug\net6.0\HRSystem.Data.pdb
+C:\Users\lehovhan\source\repos\HRSystem\HRSystem.Data\obj\Debug\net6.0\HRSystem.Data.csproj.AssemblyReference.cache
+C:\Users\lehovhan\source\repos\HRSystem\HRSystem.Data\obj\Debug\net6.0\HRSystem.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lehovhan\source\repos\HRSystem\HRSystem.Data\obj\Debug\net6.0\HRSystem.Data.AssemblyInfoInputs.cache
+C:\Users\lehovhan\source\repos\HRSystem\HRSystem.Data\obj\Debug\net6.0\HRSystem.Data.AssemblyInfo.cs
+C:\Users\lehovhan\source\repos\HRSystem\HRSystem.Data\obj\Debug\net6.0\HRSystem.Data.csproj.CoreCompileInputs.cache
+C:\Users\lehovhan\source\repos\HRSystem\HRSystem.Data\obj\Debug\net6.0\HRSystem.Data.dll
+C:\Users\lehovhan\source\repos\HRSystem\HRSystem.Data\obj\Debug\net6.0\refint\HRSystem.Data.dll
+C:\Users\lehovhan\source\repos\HRSystem\HRSystem.Data\obj\Debug\net6.0\HRSystem.Data.pdb
+C:\Users\lehovhan\source\repos\HRSystem\HRSystem.Data\obj\Debug\net6.0\ref\HRSystem.Data.dll
+C:\Users\lehovhan\source\repos\HRSystem\HRSystem.Data\bin\Debug\net6.0\HRSystem.Data.runtimeconfig.json
+C:\Users\lehovhan\source\repos\HRSystem\HRSystem.Data\obj\Debug\net6.0\HRSystem.Data.genruntimeconfig.cache

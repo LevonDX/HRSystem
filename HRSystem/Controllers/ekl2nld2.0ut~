@@ -51,35 +51,19 @@ namespace HRSystem.UI.Controllers
                 return View();
             }
 
-            if (model.id == 0)
+            Employee employee = new Employee()
             {
-                Employee employee = new Employee()
-                {
-                    Name = model.Name,
-                    Surname = model.Surname,
-                    Email = model.Email
-                };
+                Name = model.Name,
+                Surname = model.Surname,
+                Email = model.Email
+            };
 
-                using (var context = new HRSystemDBContext())
-                {
-                    await context.Employees.AddAsync(employee);
-                    await context.SaveChangesAsync();
-                }
-            }
-            else
+            using (var context = new HRSystemDBContext())
             {
-                using (var context = new HRSystemDBContext())
-                {
-                    Employee? employee = await context.Employees.FindAsync(model.id);
-                    
-                    employee.Name = model.Name;
-                    employee.Surname = model.Surname;
-                    employee.Email = model.Email;
-                    
-                    await context.SaveChangesAsync();
-                }
+                await context.Employees.AddAsync(employee);
+                await context.SaveChangesAsync();
             }
-            
+
             return RedirectToAction("List");
         }
 
@@ -95,9 +79,8 @@ namespace HRSystem.UI.Controllers
                     Surname = employee.Surname,
                     Email = employee.Email
                 };
-                ViewBag.IsEdit = true;
 
-                return View("Add", employeeViewModel);
+                return View("Add",employeeViewModel);
             }
         }
     }

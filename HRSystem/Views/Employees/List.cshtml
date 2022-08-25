@@ -16,6 +16,7 @@
             <tr>
                 <td>@Html.DisplayFor(i=>item.Name)</td>
                 <td>@Html.DisplayFor(i=>item.Surname)</td>
+                <td><a asp-action="Edit" asp-controller="Employees" asp-route-id="@item.id">Edit</a></td>
             </tr>
         }
     </thead>

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRSystem.UI", "HRSystem\HRSystem.UI.csproj", "{CF3F73CE-CB79-4BCF-8768-A3F8589B929E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRSystem.UI", "HRSystem\HRSystem.UI.csproj", "{CF3F73CE-CB79-4BCF-8768-A3F8589B929E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRSystem.Data", "HRSystem.Data\HRSystem.Data.csproj", "{9B3FDFFF-6A6E-490B-BEF3-4238B1AE53E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRSystem.Data", "HRSystem.Data\HRSystem.Data.csproj", "{9B3FDFFF-6A6E-490B-BEF3-4238B1AE53E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRSystem.Tests", "HRSystem.Tests\HRSystem.Tests.csproj", "{B7024596-5BBB-4C70-A6D6-FB429356C6D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRSystem.Tests", "HRSystem.Tests\HRSystem.Tests.csproj", "{B7024596-5BBB-4C70-A6D6-FB429356C6D4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A7091C54-885E-4660-AED6-6DC2470D5A71}"
 	ProjectSection(SolutionItems) = preProject

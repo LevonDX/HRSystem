@@ -1,4 +1,5 @@
-﻿using HRSystem.Data.Context;
+﻿using HRSystem.Data.Concrete;
+using HRSystem.Data.Context;
 using HRSystem.Data.Entities;
 using HRSystem.UI.Infrastructure;
 using HRSystem.UI.Models;
@@ -60,29 +61,30 @@ namespace HRSystem.UI.Controllers
                     Email = model.Email
                 };
 
-                using (var context = new HRSystemDBContext())
+                using (var repo = new EmployeeRepository())
                 {
-                    await context.Employees.AddAsync(employee);
-                    await context.SaveChangesAsync();
+                    await repo.AddAsync(employee);
+                    await repo.SaveAsync();
                 }
             }
             else
             {
-                using (var context = new HRSystemDBContext())
+                using (var repo = new EmployeeRepository())
                 {
-                    Employee? employee = await context.Employees.FindAsync(model.id);
+                    Employee? employee = await repo.GetEmployeeByIDAsync(model.id);
                     
                     employee.Name = model.Name;
                     employee.Surname = model.Surname;
                     employee.Email = model.Email;
                     
-                    await context.SaveChangesAsync();
+                    await repo.SaveAsync();
                 }
             }
             
             return RedirectToAction("List");
         }
 
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             using (HRSystemDBContext context = new HRSystemDBContext())

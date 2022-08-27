@@ -26,6 +26,13 @@ namespace HRSystem.Data.Context
             return optionsBuilder.Options;
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Employee>().HasQueryFilter(e => !e.IsDeleted);
+            
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Departament> Departaments { get; set; }
     }

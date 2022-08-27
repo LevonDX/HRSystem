@@ -1,26 +1,22 @@
 ﻿@using HRSystem.UI.Models
 @model EmployeeViewModel
 
-@if(!String.IsNullOrEmpty(ViewBag.ErrorMessage?.ToString()))
+@if (!String.IsNullOrEmpty(ViewBag.ErrorMessage?.ToString()))
 {
     <h3 style="color:red">@ViewBag.ErrorMessage.ToString()</h3>
 }
 
 <form asp-action="Add" asp-controller="Employees" method="post">
     <div class="form-group">
-        <label for="Name">id</label>
-        <input type="text" class="form-control" asp-for="id" placeholder="Name" />
-    </div>
-    <div class="form-group">
         <label for="Name">Name</label>
         <input type="text" class="form-control" asp-for="Name" placeholder="Name" />
     </div>
-    
+
     <div class="form-group">
         <label for="Surname">Surname</label>
         <input type="text" class="form-control" asp-for="Surname" placeholder="Surname" />
     </div>
-    
+
     <div class="form-group">
         <label for="Surname">Email</label>
         <input type="text" class="form-control" asp-for="Email" placeholder="Surname" />

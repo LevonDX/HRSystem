@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace HRSystem.Data.Concrete
 {
-    public class EmployeeRepository : IDisposable
+    public class HrSystemRepository<T> : IDisposable where T:EntityBase
     {
         HRSystemDBContext context;
 
-        public EmployeeRepository()
+        public HrSystemRepository()
         {
             context = new HRSystemDBContext();
         }
@@ -27,21 +27,21 @@ namespace HRSystem.Data.Concrete
             await context.SaveChangesAsync();
         }
 
-        public async Task AddAsync(Employee employee)
+        public async Task AddAsync(T employee)
         {
-            await context.Employees.AddAsync(employee);
+            await context.AddAsync(employee);
         }
-        public void Add(Employee employee)
+        public void Add(T employee)
         {
-            context.Employees.Add(employee);
+            context.Add(employee);
         }
 
-        public IEnumerable<Employee> GetEmployees(bool getDeleted = false)
+        public IEnumerable<T> GetEmployees(bool getDeleted = false)
         {
             if (!getDeleted)
-                return this.context.Employees.Where(e => !e.IsDeleted);
+                return this.context.Set<T>().Where(e => !e.IsDeleted);
             else
-                return this.context.Employees;
+                return this.context.Set<T>();
         }
 
         public IEnumerable<Employee> GetEmployees()
@@ -50,9 +50,9 @@ namespace HRSystem.Data.Concrete
         }
 
 
-        public void Update(Employee employee)
+        public void Update(T employee)
         {
-            context.Entry(employee).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            context.Entry<T>(employee).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         }
 
         public Employee? GetEmployeeByID(int ID)

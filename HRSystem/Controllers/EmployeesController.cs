@@ -20,7 +20,6 @@ namespace HRSystem.UI.Controllers
             {
                 List<Employee> employees = hRSystemDBContext.Employees.ToList();
 
-
                 List<EmployeeViewModel> employeeViewModels = new List<EmployeeViewModel>();
                 foreach (Employee item in employees)
                 {
@@ -61,7 +60,7 @@ namespace HRSystem.UI.Controllers
                     Email = model.Email
                 };
 
-                using (var repo = new EmployeeRepository())
+                using (var repo = new HrSystemRepository())
                 {
                     await repo.AddAsync(employee);
                     await repo.SaveAsync();
@@ -69,7 +68,7 @@ namespace HRSystem.UI.Controllers
             }
             else
             {
-                using (var repo = new EmployeeRepository())
+                using (var repo = new HrSystemRepository())
                 {
                     Employee? employee = await repo.GetEmployeeByIDAsync(model.id);
                     

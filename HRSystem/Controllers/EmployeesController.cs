@@ -52,7 +52,7 @@ namespace HRSystem.UI.Controllers
                 return View();
             }
 
-            if (model.id == 0)
+            if (!model.id.HasValue)
             {
                 Employee employee = new Employee()
                 {
@@ -71,7 +71,7 @@ namespace HRSystem.UI.Controllers
             {
                 using (var repo = new EmployeeRepository())
                 {
-                    Employee? employee = await repo.GetEmployeeByIDAsync(model.id);
+                    Employee? employee = await repo.GetEmployeeByIDAsync(model.id ?? 0);
                     
                     employee.Name = model.Name;
                     employee.Surname = model.Surname;
@@ -101,6 +101,18 @@ namespace HRSystem.UI.Controllers
 
                 return View("Add", employeeViewModel);
             }
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            using (EmployeeRepository repository = new EmployeeRepository())
+            {
+                repository.DeleteEmployee(id);
+                repository.Save();
+            }
+
+            return RedirectToAction(nameof(List));
         }
     }
 }

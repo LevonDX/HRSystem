@@ -3,21 +3,24 @@
 
 <a asp-controller="Employees" asp-action="Add">Add New</a>
 
-<table class="table">
-    <thead>
-        <tr>
-            @{
-                <th>@Html.DisplayNameFor(i=>i.Name)</th>
-                <th>@Html.DisplayNameFor(i=>i.Surname)</th>
-            }
-        </tr>
-        @foreach (EmployeeViewModel item in Model)
-        {
+<form method="post">
+    <table class="table">
+        <thead>
             <tr>
-                <td>@Html.DisplayFor(i=>item.Name)</td>
-                <td>@Html.DisplayFor(i=>item.Surname)</td>
-                <td><a asp-action="Edit" asp-controller="Employees" asp-route-id="@item.id">Edit</a></td>
+                @{
+                    <th>@Html.DisplayNameFor(i=>i.Name)</th>
+                    <th>@Html.DisplayNameFor(i=>i.Surname)</th>
+                }
             </tr>
-        }
-    </thead>
-</table>
+            @foreach (EmployeeViewModel item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(i=>item.Name)</td>
+                    <td>@Html.DisplayFor(i=>item.Surname)</td>
+                    <td><a asp-action="Edit" asp-controller="Employees" asp-route-id="@item.id">Edit</a></td>
+                    <td><button value="delete" asp-action="Delete" asp-route-id="@item.id">Delete</button></td>
+                </tr>
+            }
+        </thead>
+    </table>
+</form>

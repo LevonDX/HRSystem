@@ -4,7 +4,7 @@ namespace HRSystem.UI.Models
 {
     public class EmployeeViewModel
     {
-        public int id { get; set; }
+        public int? id { get; set; }
 
         [Display(Name ="Անուն")]
         public string Name { get; set; }

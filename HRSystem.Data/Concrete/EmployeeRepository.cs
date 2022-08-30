@@ -72,6 +72,13 @@ namespace HRSystem.Data.Concrete
             this.context.Employees.Remove(employee);
         }
 
+        public void DeleteEmployee(int id)
+        {
+            Employee? employee = this.context.Employees.Find(id);
+            
+            this.context.Employees.Remove(employee);
+        }
+
         public void Dispose()
         {
             this.context.Dispose();

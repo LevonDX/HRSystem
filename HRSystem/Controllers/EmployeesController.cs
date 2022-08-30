@@ -11,10 +11,12 @@ namespace HRSystem.UI.Controllers
     public class EmployeesController : Controller
     {
         IEmployeeRepository _repository;
-
-        public EmployeesController()
+        HRSystemDBContext _context;
+        
+        public EmployeesController(IEmployeeRepository repository, HRSystemDBContext context)
         {
-            _repository = new EmployeeRepository();
+            _repository = repository;
+            _context = context;
         }
 
         public IActionResult Index()

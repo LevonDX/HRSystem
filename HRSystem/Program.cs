@@ -1,3 +1,8 @@
+using HRSystem.Data.Abstract;
+using HRSystem.Data.Concrete;
+using HRSystem.Data.Context;
+using Microsoft.EntityFrameworkCore;
+
 namespace HRSystem.UI
 {
     public class Program
@@ -9,6 +14,9 @@ namespace HRSystem.UI
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+
+            builder.Services.AddDbContext<HRSystemDBContext>(options => options.UseSqlServer("asdasdasd"));
 
             var app = builder.Build();
 

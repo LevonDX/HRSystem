@@ -1,4 +1,5 @@
-﻿using HRSystem.Data.Context;
+﻿using HRSystem.Data.Abstract;
+using HRSystem.Data.Context;
 using HRSystem.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HRSystem.Data.Concrete
 {
-    public class EmployeeRepository : IDisposable
+    public class EmployeeRepository : IEmployeeRepository, IDisposable
     {
         HRSystemDBContext context;
 
@@ -31,6 +32,7 @@ namespace HRSystem.Data.Concrete
         {
             await context.Employees.AddAsync(employee);
         }
+        
         public void Add(Employee employee)
         {
             context.Employees.Add(employee);
@@ -39,9 +41,9 @@ namespace HRSystem.Data.Concrete
         public IEnumerable<Employee> GetEmployees(bool getDeleted = false)
         {
             if (!getDeleted)
-                return this.context.Employees.Where(e => !e.IsDeleted);
+                return context.Employees.Where(e => !e.IsDeleted);
             else
-                return this.context.Employees;
+                return context.Employees;
         }
 
         public IEnumerable<Employee> GetEmployees()
@@ -69,19 +71,19 @@ namespace HRSystem.Data.Concrete
 
         public void DeleteEmployee(Employee employee)
         {
-            this.context.Employees.Remove(employee);
+            context.Employees.Remove(employee);
         }
 
         public void DeleteEmployee(int id)
         {
             Employee? employee = this.context.Employees.Find(id);
             
-            this.context.Employees.Remove(employee);
+            context.Employees.Remove(employee!);
         }
 
         public void Dispose()
         {
-            this.context.Dispose();
+            context.Dispose();
         }
     }
 }

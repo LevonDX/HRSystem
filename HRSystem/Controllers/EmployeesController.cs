@@ -1,4 +1,5 @@
-﻿using HRSystem.Data.Concrete;
+﻿using HRSystem.Data.Abstract;
+using HRSystem.Data.Concrete;
 using HRSystem.Data.Context;
 using HRSystem.Data.Entities;
 using HRSystem.UI.Infrastructure;
@@ -9,6 +10,13 @@ namespace HRSystem.UI.Controllers
 {
     public class EmployeesController : Controller
     {
+        IEmployeeRepository _repository;
+
+        public EmployeesController()
+        {
+            _repository = new EmployeeRepository();
+        }
+
         public IActionResult Index()
         {
             return new NotFoundResult();
@@ -16,27 +24,25 @@ namespace HRSystem.UI.Controllers
 
         public IActionResult List()
         {
-            using (HRSystemDBContext hRSystemDBContext = new HRSystemDBContext())
+            List<Employee> employees = _repository.GetEmployees().ToList();
+
+            List<EmployeeViewModel> employeeViewModels = new List<EmployeeViewModel>();
+
+            foreach (Employee item in employees)
             {
-                List<Employee> employees = hRSystemDBContext.Employees.ToList();
-
-
-                List<EmployeeViewModel> employeeViewModels = new List<EmployeeViewModel>();
-                foreach (Employee item in employees)
+                EmployeeViewModel model = new EmployeeViewModel()
                 {
-                    EmployeeViewModel model = new EmployeeViewModel()
-                    {
-                        id = item.Id,
-                        Name = item.Name,
-                        Surname = item.Surname
-                    };
+                    id = item.Id,
+                    Name = item.Name,
+                    Surname = item.Surname
+                };
 
-                    employeeViewModels.Add(model);
-                }
-
-                return View(employeeViewModels);
+                employeeViewModels.Add(model);
             }
+
+            return View(employeeViewModels);
         }
+        
         [HttpGet]
         public IActionResult Add()
         {
@@ -61,56 +67,46 @@ namespace HRSystem.UI.Controllers
                     Email = model.Email
                 };
 
-                using (var repo = new EmployeeRepository())
-                {
-                    await repo.AddAsync(employee);
-                    await repo.SaveAsync();
-                }
+
+                await _repository.AddAsync(employee);
+                await _repository.SaveAsync();
             }
             else
             {
-                using (var repo = new EmployeeRepository())
-                {
-                    Employee? employee = await repo.GetEmployeeByIDAsync(model.id ?? 0);
-                    
-                    employee.Name = model.Name;
-                    employee.Surname = model.Surname;
-                    employee.Email = model.Email;
-                    
-                    await repo.SaveAsync();
-                }
+                Employee? employee = await _repository.GetEmployeeByIDAsync(model.id ?? 0);
+
+                employee.Name = model.Name;
+                employee.Surname = model.Surname;
+                employee.Email = model.Email;
+
+                await _repository.SaveAsync();
             }
-            
+
             return RedirectToAction("List");
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            using (HRSystemDBContext context = new HRSystemDBContext())
+            Employee? employee = _repository.GetEmployeeByID(id);
+
+            EmployeeViewModel employeeViewModel = new EmployeeViewModel()
             {
-                Employee? employee = context.Employees.Find(id);
+                Name = employee.Name,
+                Surname = employee.Surname,
+                Email = employee.Email
+            };
+            ViewBag.IsEdit = true;
 
-                EmployeeViewModel employeeViewModel = new EmployeeViewModel()
-                {
-                    Name = employee.Name,
-                    Surname = employee.Surname,
-                    Email = employee.Email
-                };
-                ViewBag.IsEdit = true;
-
-                return View("Add", employeeViewModel);
-            }
+            return View("Add", employeeViewModel);
         }
 
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            using (EmployeeRepository repository = new EmployeeRepository())
-            {
-                repository.DeleteEmployee(id);
-                repository.Save();
-            }
+
+            _repository.DeleteEmployee(id);
+            _repository.Save();
 
             return RedirectToAction(nameof(List));
         }
